@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusFi | Smart Loan Engine</title>
+    <meta name="description" content="AI-powered loan approval system predicting your eligibility in seconds.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <main class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="url(#paint0_linear)"/>
+                    <path d="M2 17L12 22L22 17" stroke="url(#paint1_linear)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="url(#paint2_linear)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                        <linearGradient id="paint0_linear" x1="12" y1="2" x2="12" y2="12" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#4F46E5"/>
+                            <stop offset="1" stop-color="#06B6D4"/>
+                        </linearGradient>
+                        <linearGradient id="paint1_linear" x1="12" y1="17" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#4F46E5"/>
+                            <stop offset="1" stop-color="#06B6D4"/>
+                        </linearGradient>
+                        <linearGradient id="paint2_linear" x1="12" y1="12" x2="12" y2="17" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#4F46E5"/>
+                            <stop offset="1" stop-color="#06B6D4"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>NexusFi</h1>
+            </div>
+            <p>AI-Powered Loan Approvals</p>
+        </header>
+
+        <section class="form-section">
+            <form id="loanForm" class="loan-form">
+                
+                <div class="input-group full-width">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="John Doe" required>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" placeholder="30" min="18" max="100" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="dependents">Dependents</label>
+                        <input type="number" id="dependents" name="dependents" placeholder="0" min="0" required>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="annualIncome">Annual Income ($)</label>
+                        <input type="number" id="annualIncome" name="annualIncome" placeholder="65000" min="0" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="loanAmount">Loan Amount ($)</label>
+                        <input type="number" id="loanAmount" name="loanAmount" placeholder="20000" min="0" required>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="loanTerm">Loan Term (Months)</label>
+                        <input type="number" id="loanTerm" name="loanTerm" placeholder="36" min="1" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="creditScore">Credit Score</label>
+                        <input type="number" id="creditScore" name="creditScore" placeholder="720" min="300" max="850" required>
+                    </div>
+                </div>
+                
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="employmentYears">Employment Years</label>
+                        <input type="number" id="employmentYears" name="employmentYears" placeholder="5" min="0" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="propertyArea">Property Area</label>
+                        <select id="propertyArea" name="propertyArea" required>
+                            <option value="Urban">Urban</option>
+                            <option value="Semiurban">Semiurban</option>
+                            <option value="Rural">Rural</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group filter-group">
+                        <label>Education</label>
+                        <div class="radio-pill-group">
+                            <input type="radio" id="grad" name="education" value="Graduate" checked>
+                            <label for="grad">Graduate</label>
+                            
+                            <input type="radio" id="notGrad" name="education" value="Not Graduate">
+                            <label for="notGrad">Non-Grad</label>
+                        </div>
+                    </div>
+                    <div class="input-group filter-group">
+                        <label>Self Employed</label>
+                        <div class="radio-pill-group">
+                            <input type="radio" id="selfYes" name="selfEmployed" value="Yes">
+                            <label for="selfYes">Yes</label>
+                            
+                            <input type="radio" id="selfNo" name="selfEmployed" value="No" checked>
+                            <label for="selfNo">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span class="btn-text">Check Eligibility</span>
+                    <div class="loader hidden" id="btnLoader"></div>
+                </button>
+            </form>
+        </section>
+
+        <!-- Result Modal / Status Overlay -->
+        <div id="resultOverlay" class="result-overlay hidden">
+            <div class="result-card">
+                <button class="close-btn" id="closeResult">×</button>
+                <div class="result-icon" id="resultIcon">
+                    <!-- Injected via JS -->
+                </div>
+                <h2 id="resultTitle">Analyzing...</h2>
+                <p id="resultMessage">Please wait while our AI models process your application.</p>
+                <button class="action-btn hidden" id="resetBtn">Run Another Check</button>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
